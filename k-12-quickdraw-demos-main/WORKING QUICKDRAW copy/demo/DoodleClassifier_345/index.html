@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<h1>K-12 QuickDraw Demos</h1>
+
+<p>A doodle classifier on cat and sheep images <a href="https://quickdraw.withgoogle.com/data"
+    target="_blank">Quickdraw dataset</a></p>
+
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
+
+<style>
+
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    button {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 24pt;
+      margin-right: 10px;
+      border: 1px solid black;
+      background: white;
+    }
+
+    canvas {
+      border: 1px solid black;
+      margin: 20px 20px 0 0;
+    }
+
+    #grid {
+      display: flex;
+      justify-content: start;
+    }
+
+    #res {
+      font-size: 22px;
+    }
+
+    .modebar{
+        display: none !important;
+
+    }
+
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<script type="text/javascript" src="AI.js"></script>
+
+</head>
+
+
+<body> 
+
+    <div class="pure-g" style="height: 320px">
+
+        <div class="pure-u-1-3">
+            <button id="guess">guess</button>
+            <button id="clear">clear</button>
+        </div>
+
+        <div class="pure-u-1-3"> 
+		    <div id="grid">       
+                <div id="canvasContainer"></div>   
+                <h3 id="res"></h3>
+	    	</div>
+	    </div>
+
+    </div>
+
+
+    <div>
+        <p style="color: Navy ; text-align: center; font-weight: bold;">
+            First Convolution Layer's Activation-Map
+        </p>
+    </div>
+
+    <div class="pure-g">
+
+        <div class="pure-u-1-8" id = "fc_0"></div>
+        <div class="pure-u-1-8" id = "fc_1"></div>
+        <div class="pure-u-1-8" id = "fc_2"></div>
+        <div class="pure-u-1-8" id = "fc_3"></div>
+        <div class="pure-u-1-8" id = "fc_4"></div>
+        <div class="pure-u-1-8" id = "fc_5"></div>
+        <div class="pure-u-1-8" id = "fc_6"></div>
+        <div class="pure-u-1-8" id = "fc_7"></div>
+
+    </div>
+
+    <div class="pure-g">
+        
+        <div class="pure-u-1-8" id = "fc_8"></div>
+        <div class="pure-u-1-8" id = "fc_9"></div>
+        <div class="pure-u-1-8" id = "fc_10"></div>
+        <div class="pure-u-1-8" id = "fc_11"></div>
+        <div class="pure-u-1-8" id = "fc_12"></div>
+        <div class="pure-u-1-8" id = "fc_13"></div>
+        <div class="pure-u-1-8" id = "fc_14"></div>
+        <div class="pure-u-1-8" id = "fc_15"></div>
+    </div>
+
+    <div>
+
+        <p style="color: Navy ; text-align: center; font-weight: bold;">
+            Second Convolution Layer's Activation-Map
+        </p>
+    </div>
+
+    <div class="pure-g">
+
+        <div class="pure-u-1-16" id = "sc_0"></div>
+        <div class="pure-u-1-16" id = "sc_1"></div>
+        <div class="pure-u-1-16" id = "sc_2"></div>
+        <div class="pure-u-1-16" id = "sc_3"></div>
+        <div class="pure-u-1-16" id = "sc_4"></div>
+        <div class="pure-u-1-16" id = "sc_5"></div>
+        <div class="pure-u-1-16" id = "sc_6"></div>
+        <div class="pure-u-1-16" id = "sc_7"></div>
+        <div class="pure-u-1-16" id = "sc_8"></div>
+        <div class="pure-u-1-16" id = "sc_9"></div>
+        <div class="pure-u-1-16" id = "sc_10"></div>
+        <div class="pure-u-1-16" id = "sc_11"></div>
+        <div class="pure-u-1-16" id = "sc_12"></div>
+        <div class="pure-u-1-16" id = "sc_13"></div>
+        <div class="pure-u-1-16" id = "sc_14"></div>
+        <div class="pure-u-1-16" id = "sc_15"></div>
+    </div>
+
+    <div class="pure-g">
+
+        <div class="pure-u-1-16" id = "sc_16"></div>
+        <div class="pure-u-1-16" id = "sc_17"></div>
+        <div class="pure-u-1-16" id = "sc_18"></div>
+        <div class="pure-u-1-16" id = "sc_19"></div>
+        <div class="pure-u-1-16" id = "sc_20"></div>
+        <div class="pure-u-1-16" id = "sc_21"></div>
+        <div class="pure-u-1-16" id = "sc_22"></div>
+        <div class="pure-u-1-16" id = "sc_23"></div>
+        <div class="pure-u-1-16" id = "sc_24"></div>
+        <div class="pure-u-1-16" id = "sc_25"></div>
+        <div class="pure-u-1-16" id = "sc_26"></div>
+        <div class="pure-u-1-16" id = "sc_27"></div>
+        <div class="pure-u-1-16" id = "sc_28"></div>
+        <div class="pure-u-1-16" id = "sc_29"></div>
+        <div class="pure-u-1-16" id = "sc_30"></div>
+        <div class="pure-u-1-16" id = "sc_31"></div>
+    </div>
+
+    <div>
+
+        <p style="color: Navy ; text-align: center; font-weight: bold;">
+
+            Third Convolution Layer's Activation-Map
+
+        </p>
+
+    </div>
+
+    <div class="pure-g">
+
+        <div class="pure-u-1-32" id = "tc_0"></div>
+        <div class="pure-u-1-32" id = "tc_1"></div> 
+        <div class="pure-u-1-32" id = "tc_2"></div>
+        <div class="pure-u-1-32" id = "tc_3"></div>
+        <div class="pure-u-1-32" id = "tc_4"></div>
+        <div class="pure-u-1-32" id = "tc_5"></div>
+        <div class="pure-u-1-32" id = "tc_6"></div>
+        <div class="pure-u-1-32" id = "tc_7"></div>
+        <div class="pure-u-1-32" id = "tc_8"></div>
+        <div class="pure-u-1-32" id = "tc_9"></div>
+        <div class="pure-u-1-32" id = "tc_10"></div>
+        <div class="pure-u-1-32" id = "tc_11"></div>
+        <div class="pure-u-1-32" id = "tc_12"></div>
+        <div class="pure-u-1-32" id = "tc_13"></div>
+        <div class="pure-u-1-32" id = "tc_14"></div>
+        <div class="pure-u-1-32" id = "tc_15"></div>
+        <div class="pure-u-1-32" id = "tc_16"></div>
+        <div class="pure-u-1-32" id = "tc_17"></div> 
+        <div class="pure-u-1-32" id = "tc_18"></div>
+        <div class="pure-u-1-32" id = "tc_19"></div>
+        <div class="pure-u-1-32" id = "tc_20"></div>
+        <div class="pure-u-1-32" id = "tc_21"></div>
+        <div class="pure-u-1-32" id = "tc_22"></div>
+        <div class="pure-u-1-32" id = "tc_23"></div>
+        <div class="pure-u-1-32" id = "tc_24"></div>
+        <div class="pure-u-1-32" id = "tc_25"></div>
+        <div class="pure-u-1-32" id = "tc_26"></div>            
+        <div class="pure-u-1-32" id = "tc_27"></div>
+        <div class="pure-u-1-32" id = "tc_28"></div>
+        <div class="pure-u-1-32" id = "tc_29"></div>
+        <div class="pure-u-1-32" id = "tc_30"></div>
+        <div class="pure-u-1-32" id = "tc_31"></div>
+    </div>
+
+</body>
+
+</html>>
