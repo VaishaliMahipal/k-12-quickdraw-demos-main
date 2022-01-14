@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>
+            AI Demos
+        </title>
+        <h1>
+            Doodle classifier
+        </h1>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+        <script src='vis.js'></script>
+        <style>
+            body {
+              font-family: 'Courier New', Courier, monospace;
+            }
+        
+            button {
+              font-family: 'Courier New', Courier, monospace;
+              font-size: 24pt;
+              margin-right: 10px;
+              border: 1px solid black;
+              background: white;
+            }
+        
+            canvas {
+              border: 1px solid black;
+              margin: 20px 20px 0 0;
+            }
+        
+            #grid {
+              display: flex;
+              justify-content: start;
+            }
+        
+            #res {
+              font-size: 22px;
+            }
+          </style>
+    </head>
+    <body>
+        <h1>K-12 QuickDraw Demos</h1>
+        <p>A doodle classifier on cat,sheep,apple,door,cake and triangle images <a href="https://quickdraw.withgoogle.com/data" target="_blank">Quickdraw dataset</a></p>
+        <button id="guess">guess</button>
+        <button id="clear">clear</button>
+        <div id="grid">
+            <div id="canvasContainer"></div>
+            <h3 id="res"></h3>
+        </div>
+        <p>Convolution Layer 1</p>
+        <div id='activationMaps'></div>
+        <p>Convolution Layer 2</p>
+        <div id='activationMaps2'></div>
+        <p>Convolution Layer 3</p>
+        <div id='activationMaps3'></div>
+    </body>
+
+</html>

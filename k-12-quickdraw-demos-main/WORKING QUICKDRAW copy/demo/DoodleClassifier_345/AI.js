@@ -61,13 +61,13 @@ function guess() {
     var input = []
     console.log(input)
     input.push(tf.tidy(() => { return tf.expandDims(feedImage,0).asType('float32')}));
-    console.log(input)
-
+    console.log(input);
     for (var i = 1; i <= 10; i++)
     {
         input.push(model.layers[i]);
 
     }
+    
     console.log(input.length)
     const firstconv = input[1];
     const secondconv = input[3];
