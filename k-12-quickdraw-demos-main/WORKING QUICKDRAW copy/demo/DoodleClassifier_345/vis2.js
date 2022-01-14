@@ -5,7 +5,7 @@ let model;
 let cnv;
 
 async function loadMyModel() {
-  model = await tf.loadLayersModel('model/model.json');
+  model = await tf.loadLayersModel('model1/model.json');
   model.summary();
 }
 
@@ -71,21 +71,23 @@ function guess() {
   }
   inputImage=tf.tensor2d(IdImage, [784, 1]);
   inputImage1=inputImage.reshape([1,28,28,1])
-  const { filters, filterActivations } = getActivationTable(inputImage1,'conv2d');
-  console.log("filters in guess function")
-  console.log(filters)
-  console.log("activations in guess function")
-  console.log(filterActivations)
-  renderImageTable(document.querySelector('#activationMaps'), filters, filterActivations);
-  //const { filt, filtAc} = getActivationTable(inputImage1,'conv2d_1');
-  //console.log(filt)
-  //console.log(filtAc)
-  //renderImageTable(document.querySelector('#activationMaps2'), filt, filtAc);
-  //const { filters3, filterActivations3 } = getActivationTable(inputImage1,'conv2d_2');
-  //console.log(filters3)
-  //console.log(filterActivations3)
-  //renderImageTable(document.querySelector('#activationMaps3'), filters3, filterActivations3);
-
+  nameL=[]
+  nameL.push("conv2d")
+  nameL.push("conv2d_1")
+  positionA=[]
+  positionA.push("#activationMaps")
+  positionA.push("#activationMaps2")
+  for(var i = 0 ; i < 2 ; i++)
+    {
+       const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
+       console.log("filters in guess function")
+       console.log(filters)
+       console.log("activations in guess function")
+       console.log(filterActivations)
+       renderImageTable(document.querySelector(positionA[i]), filters, filterActivations);
+    }
+ 
+  
 }
 
 async function renderImage(container, tensor, imageOpts) {
@@ -99,6 +101,8 @@ async function renderImage(container, tensor, imageOpts) {
     canvas.height = imageOpts.height;
     canvas.style = `margin: 4px; width:${imageOpts.width}px; height:${imageOpts.height}px`;
     container.appendChild(canvas);
+    console.log("rsized")
+    console.log(resized)
     await tf.browser.toPixels(resized, canvas);
     resized.dispose();
   }
@@ -112,12 +116,16 @@ async function renderImage(container, tensor, imageOpts) {
     }
 
     const headers = table.select('thead').select('tr').selectAll('th').data(headerData);
-    const headersEnter = headers.enter().append('th')
+    const headersEnter = headers.enter().append('th');
     headers.merge(headersEnter).each((d, i, group) => {
       const node = group[i];
       if (typeof d == 'string') {
         node.innerHTML = d;
       } else {
+          console.log("node=")
+          console.log(node)
+          console.log("d=")
+          console.log(d)
         renderImage(node, d, { width: 50, height: 50 });
       }
     });
@@ -146,10 +154,10 @@ function getActivationTable(image1,layerName) {
     console.log("filters")
     console.log(filters)
     console.log(filters[0].shape[2])
-    if (filters[0].shape[2] > 3) {
-      filters = filters.map((d, i) => `Filter ${i + 1}`);
-      console.log("infor loop")
-    }
+   // if (filters[0].shape[2] > 3) {
+     // filters = filters.map((d, i) => `Filter ${i}`);
+      //console.log("infor loop")
+    //}
     filters.unshift('Input');
     console.log("filters1")
     console.log(filters)
@@ -160,6 +168,10 @@ function getActivationTable(image1,layerName) {
     });
     const activationImageSize = activations[0].shape[0]; // e.g. 24
     const numFilters = activations[0].shape[2]; // e.g. 8
+    console.log("activationImage size=")
+    console.log(activationImageSize)
+    console.log("numFilters=")
+    console.log(numFilters)
 
 
     const filterActivations = activations.map((activation, i) => {
