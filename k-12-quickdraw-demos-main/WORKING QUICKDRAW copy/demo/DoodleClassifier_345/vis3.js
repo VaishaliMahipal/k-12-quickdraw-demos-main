@@ -1,4 +1,4 @@
-// Trained on 2 filters - 8 filters of 5 by 5 and 16 filters 0f 5 by 5
+// Trained on 2 filters - 8 filters of 3 by 3 and 16 filters 0f 1 by 1
 const IMAGE_SIZE = 784;
 const CLASSES = ['cat','sheep','apple','door','cake','triangle']
 const k = 10;
@@ -6,7 +6,7 @@ let model;
 let cnv;
 
 async function loadMyModel() {
-  model = await tf.loadLayersModel('model1/model.json');
+  model = await tf.loadLayersModel('model2/model.json');
   model.summary();
 }
 
@@ -75,9 +75,11 @@ function guess() {
   nameL=[]
   nameL.push("conv2d")
   nameL.push("conv2d_1")
+  nameL.push("dense")
   positionA=[]
   positionA.push("#activationMaps")
   positionA.push("#activationMaps2")
+  positionA.push("#activationMaps3")
   for(var i = 0 ; i < 2 ; i++)
     {
        const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
@@ -87,6 +89,11 @@ function guess() {
        console.log(filterActivations)
        renderImageTable(document.querySelector(positionA[i]), filters, filterActivations);
     }
+  const denseActivation=getActivation(inputImage1,model,model.getLayer('dense'));
+
+  console.log("Dense activation=");
+  console.log(denseActivation);
+
  
   
 }
@@ -129,7 +136,7 @@ async function renderImage(container, tensor, imageOpts) {
           console.log(d)
         renderImage(node, d, { width: 50, height: 50 });
       }
-    });
+    }); 
 
     const rows = table.select('tbody').selectAll('tr').data(data);
     const rowsEnter = rows.enter().append('tr');
@@ -155,10 +162,10 @@ function getActivationTable(image1,layerName) {
     console.log("filters")
     console.log(filters)
     console.log(filters[0].shape[2])
-    //if (filters[0].shape[2] > 3) {
-    //  filters = filters.map((d, i) => `Filter ${i}`);
-    //  console.log("infor loop")
-   // }
+    if (filters[0].shape[2] > 3) {
+      filters = filters.map((d, i) => `Filter ${i}`);
+      console.log("infor loop")
+    }
     filters.unshift('Input');
     console.log("filters1")
     console.log(filters)

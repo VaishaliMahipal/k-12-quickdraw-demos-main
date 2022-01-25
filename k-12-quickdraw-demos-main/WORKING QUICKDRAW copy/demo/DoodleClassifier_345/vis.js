@@ -1,3 +1,4 @@
+// Trained on 3 filters - 64 filters of 5 by 5 and 64 filters 0f 3 by 3 and 128 filters 0f 3 by 3
 const IMAGE_SIZE = 784;
 const CLASSES = ['cat','sheep','apple','door','cake','triangle']
 const k = 10;
@@ -71,20 +72,24 @@ function guess() {
   }
   inputImage=tf.tensor2d(IdImage, [784, 1]);
   inputImage1=inputImage.reshape([1,28,28,1])
-  const { filters, filterActivations } = getActivationTable(inputImage1,'conv2d');
-  console.log("filters in guess function")
-  console.log(filters)
-  console.log("activations in guess function")
-  console.log(filterActivations)
-  renderImageTable(document.querySelector('#activationMaps'), filters, filterActivations);
-  //const { filt, filtAc} = getActivationTable(inputImage1,'conv2d_1');
-  //console.log(filt)
-  //console.log(filtAc)
-  //renderImageTable(document.querySelector('#activationMaps2'), filt, filtAc);
-  //const { filters3, filterActivations3 } = getActivationTable(inputImage1,'conv2d_2');
-  //console.log(filters3)
-  //console.log(filterActivations3)
-  //renderImageTable(document.querySelector('#activationMaps3'), filters3, filterActivations3);
+  nameL=[]
+  nameL.push("conv2d")
+  nameL.push("conv2d_1")
+  nameL.push("conv2d_2")
+  positionA=[]
+  positionA.push("#activationMaps")
+  positionA.push("#activationMaps2")
+  positionA.push("#activationMaps3")
+  for(var i = 0 ; i < 3 ; i++)
+    {
+       const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
+       console.log("filters in guess function")
+       console.log(filters)
+       console.log("activations in guess function")
+       console.log(filterActivations)
+       renderImageTable(document.querySelector(positionA[i]), filters, filterActivations);
+    }
+ 
 
 }
 

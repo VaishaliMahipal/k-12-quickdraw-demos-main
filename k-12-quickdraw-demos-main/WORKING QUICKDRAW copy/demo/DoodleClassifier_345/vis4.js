@@ -1,4 +1,4 @@
-// Trained on 2 filters - 8 filters of 5 by 5 and 16 filters 0f 5 by 5
+// Trained on 1 filters - 8 filters of 3 by 3 
 const IMAGE_SIZE = 784;
 const CLASSES = ['cat','sheep','apple','door','cake','triangle']
 const k = 10;
@@ -6,7 +6,7 @@ let model;
 let cnv;
 
 async function loadMyModel() {
-  model = await tf.loadLayersModel('model1/model.json');
+  model = await tf.loadLayersModel('model3/model.json');
   model.summary();
 }
 
@@ -61,7 +61,7 @@ function guess() {
   const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
   select('#res').html(`I see: ${topKRes.toString()}`);
   
-  const layer1 = model.getLayer('conv2d');
+  const layer1 = model.getLayer('conv2d_2');
   console.log("layer1 =")
   console.log(layer1);
   
@@ -73,12 +73,10 @@ function guess() {
   inputImage=tf.tensor2d(IdImage, [784, 1]);
   inputImage1=inputImage.reshape([1,28,28,1])
   nameL=[]
-  nameL.push("conv2d")
-  nameL.push("conv2d_1")
+  nameL.push("conv2d_2")
   positionA=[]
   positionA.push("#activationMaps")
-  positionA.push("#activationMaps2")
-  for(var i = 0 ; i < 2 ; i++)
+  for(var i = 0 ; i < 1 ; i++)
     {
        const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
        console.log("filters in guess function")
@@ -87,8 +85,6 @@ function guess() {
        console.log(filterActivations)
        renderImageTable(document.querySelector(positionA[i]), filters, filterActivations);
     }
- 
-  
 }
 
 async function renderImage(container, tensor, imageOpts) {
