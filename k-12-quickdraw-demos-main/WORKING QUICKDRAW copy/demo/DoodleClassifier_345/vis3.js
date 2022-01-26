@@ -75,11 +75,9 @@ function guess() {
   nameL=[]
   nameL.push("conv2d")
   nameL.push("conv2d_1")
-  nameL.push("dense")
   positionA=[]
   positionA.push("#activationMaps")
   positionA.push("#activationMaps2")
-  positionA.push("#activationMaps3")
   for(var i = 0 ; i < 2 ; i++)
     {
        const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
