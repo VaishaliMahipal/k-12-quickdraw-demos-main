@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="style.css" />
+        <title>
+            AI Demos
+        </title>
+        <h1>
+            DoodleIt
+        </h1>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+        <script src='vis5.js'></script>
+        
+        
+    </head>
+    <body>
+        <p>Draw images of cat,sheep,apple,door,cake and triangle </p>
+        <button id="guess">guess</button>
+        <button id="clear">clear</button>
+        <div class="flex_container">
+          <div class="filter"> Filter 1 </div> 
+          <div class="filter"> Filter 2 </div> 
+          <div class="filter"> Filter 3 </div> 
+          <div class="filter"> Filter 4 </div> 
+          <div class="filter"> Filter 5 </div> 
+          <div class="filter"> Filter 6 </div> 
+          <div class="filter"> Filter 7 </div> 
+          <div class="filter"> Filter 8 </div> 
+        </div>
+        <p>Convolution Layer 1</p>
+        <div class =vertical id='activationMaps'></div>
+        <p>Convolution Layer 2</p>
+        <div class =vertical id='activationMaps2'></div>
+        <div id="grid">
+            <div  id="canvasContainer"></div>
+            <h3 id="res"></h3>
+        </div>
+        <p>Click on the "Choose File" button to upload a file:</p>
+        <form action="/action_page.php">
+          <input type="file" id="myFile" name="filename">
+          <input type="submit">
+        </form>
+        
+        
+    </body>
+
+</html>

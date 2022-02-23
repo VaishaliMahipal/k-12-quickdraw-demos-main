@@ -76,6 +76,7 @@ function guess() {
   nameL.push("conv2d_2")
   positionA=[]
   positionA.push("#activationMaps")
+  positionA.push("#activationMaps2")
   for(var i = 0 ; i < 1 ; i++)
     {
        const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
@@ -83,8 +84,27 @@ function guess() {
        console.log(filters)
        console.log("activations in guess function")
        console.log(filterActivations)
-       renderImageTable(document.querySelector(positionA[i]), filters, filterActivations);
-    }
+       
+      // renderImageTable(document.querySelector(positionA[i]), filters, filterActivations);
+      renderImageTable(document.querySelector(positionA[0]), filters);
+      renderImageTable(document.querySelector(positionA[1]),  filterActivations);
+     //renderImage(document.querySelector(positionA[i]),filterActivations,{ width: 30, height: 30 });
+    
+ // container1="#activationMaps";
+ /* const canvas1 = document.querySelector('canvas') || document.createElement('canvas');
+ canvas1.width = '30px';
+  canvas1.height = '30px';
+  canvas1.style = `margin: 4px; :30px; height:30px`;
+  //container1.appendChild(canvas1);
+  for(var i = 0 ; i < 2 ; i++)
+    {
+      const resized = tf.tidy(() =>
+      tf.image.resizeNearestNeighbor(filters[i],
+        ['30px', '30px']).clipByValue(0.0, 1.0)
+    );
+      tf.browser.toPixels(filters[i], canvas1);
+   }*/
+  }
 }
 
 async function renderImage(container, tensor, imageOpts) {
@@ -92,11 +112,11 @@ async function renderImage(container, tensor, imageOpts) {
       tf.image.resizeNearestNeighbor(tensor,
         [imageOpts.height, imageOpts.width]).clipByValue(0.0, 1.0)
     );
-
+    
     const canvas = container.querySelector('canvas') || document.createElement('canvas');
     canvas.width = imageOpts.width;
     canvas.height = imageOpts.height;
-    canvas.style = `margin: 4px; width:${imageOpts.width}px; height:${imageOpts.height}px`;
+    canvas.style = `margin: 4px; :${imageOpts.width}px; height:${imageOpts.height}px`;
     container.appendChild(canvas);
     console.log("rsized")
     console.log(resized)
@@ -104,16 +124,17 @@ async function renderImage(container, tensor, imageOpts) {
     resized.dispose();
   }
 
-  function renderImageTable(container, headerData, data) {
+  function renderImageTable(container, headerData) {
     let table = d3.select(container).select('table');
-    if (table.size() === 0) {
+    if (table.size() == 0) {
       table = d3.select(container).append('table');
       table.append('thead').append('tr');
       table.append('tbody');
     }
 
     const headers = table.select('thead').select('tr').selectAll('th').data(headerData);
-    const headersEnter = headers.enter().append('th');
+    const headersEnter = headers.enter().append('tr').append('th');
+    d => d;
     headers.merge(headersEnter).each((d, i, group) => {
       const node = group[i];
       if (typeof d == 'string') {
@@ -127,23 +148,23 @@ async function renderImage(container, tensor, imageOpts) {
       }
     });
 
-    const rows = table.select('tbody').selectAll('tr').data(data);
+    
+    /*const rows = table.select('tbody').selectAll('tr').data(headerData);
     const rowsEnter = rows.enter().append('tr');
 
     const cells = rows.merge(rowsEnter).selectAll('td').data(d => d);
     const cellsEnter = cells.enter().append('td');
     cells.merge(cellsEnter).each((d, i, group) => {
       const node = group[i];
-      console.log("node2=")
-          console.log(node)
-          console.log("d2=")
+      console.log("d2=")
           console.log(d)
       renderImage(node, d, { width: 50, height: 50 });
-    })
+    })*/
 
-    cells.exit().remove();
-    rows.exit().remove();
+   // cells.exit().remove();
+   // rows.exit().remove();
   }
+
 
 function getActivationTable(image1,layerName) {
     const exampleImageSize = 28;
@@ -185,7 +206,7 @@ function getActivationTable(image1,layerName) {
       const inputExample = tf.tidy(() =>
       inputImage1.slice([i], [1]).reshape([exampleImageSize, exampleImageSize, 1]));
 
-     // unpackedActivations.unshift(inputExample);
+      //unpackedActivations.unshift(inputExample);
       return unpackedActivations;
     });
 

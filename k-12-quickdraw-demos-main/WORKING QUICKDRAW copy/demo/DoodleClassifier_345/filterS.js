@@ -6,7 +6,7 @@ let model;
 let cnv;
 
 async function loadMyModel() {
-  model = await tf.loadLayersModel('model3/model.json');
+  model = await tf.loadLayersModel('modelMFilter/model.json');
   model.summary();
 }
 
@@ -61,7 +61,7 @@ function guess() {
   const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
   select('#res').html(`I see: ${topKRes.toString()}`);
   
-  const layer1 = model.getLayer('conv2d_2');
+  const layer1 = model.getLayer('conv2d');
   console.log("layer1 =")
   console.log(layer1);
   
@@ -73,7 +73,7 @@ function guess() {
   inputImage=tf.tensor2d(IdImage, [784, 1]);
   inputImage1=inputImage.reshape([1,28,28,1])
   nameL=[]
-  nameL.push("conv2d_2")
+  nameL.push("conv2d")
   positionA=[]
   positionA.push("#activationMaps")
   for(var i = 0 ; i < 1 ; i++)
@@ -134,10 +134,6 @@ async function renderImage(container, tensor, imageOpts) {
     const cellsEnter = cells.enter().append('td');
     cells.merge(cellsEnter).each((d, i, group) => {
       const node = group[i];
-      console.log("node2=")
-          console.log(node)
-          console.log("d2=")
-          console.log(d)
       renderImage(node, d, { width: 50, height: 50 });
     })
 
@@ -159,7 +155,7 @@ function getActivationTable(image1,layerName) {
     //  filters = filters.map((d, i) => `Filter ${i}`);
     //  console.log("infor loop")
    // }
-   // filters.unshift('Input');
+    filters.unshift('Input');
     console.log("filters1")
     console.log(filters)
 
@@ -185,7 +181,7 @@ function getActivationTable(image1,layerName) {
       const inputExample = tf.tidy(() =>
       inputImage1.slice([i], [1]).reshape([exampleImageSize, exampleImageSize, 1]));
 
-     // unpackedActivations.unshift(inputExample);
+      unpackedActivations.unshift(inputExample);
       return unpackedActivations;
     });
 

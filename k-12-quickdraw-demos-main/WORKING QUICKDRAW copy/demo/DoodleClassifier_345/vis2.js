@@ -6,7 +6,7 @@ let model;
 let cnv;
 
 async function loadMyModel() {
-  model = await tf.loadLayersModel('model1/model.json');
+  model = await tf.loadLayersModel('model4/model.json');
   model.summary();
 }
 
@@ -155,11 +155,14 @@ function getActivationTable(image1,layerName) {
     console.log("filters")
     console.log(filters)
     console.log(filters[0].shape[2])
-    //if (filters[0].shape[2] > 3) {
-    //  filters = filters.map((d, i) => `Filter ${i}`);
+   // if (filters[0].shape[2] > 3) {
+     // filters = filters.map((d, i) => `Filter ${i}`);
     //  console.log("infor loop")
    // }
-    filters.unshift('Input');
+    if (layerName=='conv2d')
+    {
+      filters.unshift('Input');
+    }
     console.log("filters1")
     console.log(filters)
 
@@ -185,7 +188,10 @@ function getActivationTable(image1,layerName) {
       const inputExample = tf.tidy(() =>
       inputImage1.slice([i], [1]).reshape([exampleImageSize, exampleImageSize, 1]));
 
-      unpackedActivations.unshift(inputExample);
+      if (layerName=='conv2d')
+      {
+        unpackedActivations.unshift(inputExample);
+      }
       return unpackedActivations;
     });
 
