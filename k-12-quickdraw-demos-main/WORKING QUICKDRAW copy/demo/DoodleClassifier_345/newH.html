@@ -1,77 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
-
-    <link rel="stylesheet" href="style.css" />
-    <title>Flexbox Crash Course</title>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="container">
-        <div class="logo">Flexbox</div>
-        <ul class="nav">
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style1.css">
+  <title>DoodleIt</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+  <script src='vis5.js'></script>
+</head>
+<body>
+    <!--Nav Bar-->
+    <div class="navbar">
+      <div class="container flex">
+        <h1 class="logo">DoodleIt</h1>
+        <nav>
+          <ul>
+            <li><a href="newH.html">Home</a></li>
+            <li><a href="Experiments.html">Experiments</a></li>
+            <li><a href="Tutorial.html">Tutorial</a></li>
+          </ul>
+        </nav>
       </div>
-    </nav>
-
-    <header class="header">
-      <div class="container">
-        <div>
-          <h1>Flexbox Crash Course</h1>
+    </div>
+    <!-- Showcase-->
+    <div class="Showcase">
+      <div class ="container flex">
+        <div class="canvas flex">
           <p>
-            This crash course was created by Brad Traversy to help you learn the
-            basics of flexbox. Flexbox is a very important and useful tool in
-            CSS.
+            You can draw images of cat, sheep, apple, door,
+             birthday-cake and triangle
           </p>
+          <div id="canvasContainer"></div>
+          <button id="clear">clear</button>
         </div>
-        <img src="https://traversymedia.com/images/grid.svg" alt="" />
-      </div>
-    </header>
-
-    <section class="boxes">
-      <div class="container">
-        <div class="box">
-          <h2><i class="fas fa-arrows-alt-v"></i> Alignment & Space</h2>
-          <p>
-            A more efficient way to lay out, align and distribute space among
-            items in a container
-          </p>
+        <div class="filter flex">
+          <p>Filters</p>
+          <div id='filters1'></div>
         </div>
-
-        <div class="box">
-          <h2><i class="fas fa-arrows-alt"></i>Tricky Positioning</h2>
-          <p>
-            Flexbox usually solves tricky problems including how to position or
-            dynamically resize elements on a page
-          </p>
+        <div class="feature flex">
+          <p>Feature Maps</p>
+          <div id='featureMaps'></div>
         </div>
-
-        <div class="box">
-          <h2><i class="fas fa-mobile"></i>Responsive Design</h2>
-          <p>
-            Flexbox makes building a website layout (and making it responsive!)
-            much, much easier
-          </p>
+        <div class="output flex">
+          <p>Output Layer</p>
+          <div  id='outputLayer'></div>
+          
         </div>
       </div>
-    </section>
-  </body>
+    </div>
+</body>
 </html>

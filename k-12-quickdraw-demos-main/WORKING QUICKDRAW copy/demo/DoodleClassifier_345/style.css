@@ -15,6 +15,7 @@ body {
 }
 
 button {
+  position: relative;
     font-family: 'Courier New', Courier, monospace;
     font-size: 24pt;
     margin-right: 10px;
@@ -23,16 +24,19 @@ button {
   }
 
   canvas {
+    position: relative;
     border: 1px solid black;
     margin: 20px 20px 0 0;
   }
 
   #grid {
+    position: relative;
     display: flex;
     justify-content: start;
   }
 
   #res {
+    position: relative;
     font-size: 22px;
   }
 

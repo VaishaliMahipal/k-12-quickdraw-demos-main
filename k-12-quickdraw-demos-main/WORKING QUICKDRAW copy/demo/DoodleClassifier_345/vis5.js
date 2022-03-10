@@ -24,17 +24,11 @@ function setup() {
   cnv.mouseReleased(guess);
   cnv.parent('canvasContainer');
 
-  // guessButton is the html button with the identifier as guess
-  let guessButton = select('#guess');
-  guessButton.mousePressed(guess);
-
-
-  // clearButton is the html button with identifies as clear
-  // when it is pressed, it will make the background color white
+  
   let clearButton = select('#clear');
   clearButton.mousePressed(() => {
     background(255);
-    select('#res').html('');
+    select('#outputLayer').html('');
   });
 }
 
@@ -59,7 +53,7 @@ function guess() {
   const sortProb = rawProbWIndex.sort((a, b) => b.probability - a.probability);
   const topKClassWIndex = sortProb.slice(0, k);
   const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
-  select('#res').html(`I see: ${topKRes.toString()}`);
+  select('#outputLayer').html(` ${topKRes.toString()}`);
   
   const layer1 = model.getLayer('conv2d_2');
   console.log("layer1 =")
@@ -75,8 +69,8 @@ function guess() {
   nameL=[]
   nameL.push("conv2d_2")
   positionA=[]
-  positionA.push("#activationMaps")
-  positionA.push("#activationMaps2")
+  positionA.push("#filters1")
+  positionA.push("#featureMaps")
   for(var i = 0 ; i < 1 ; i++)
     {
        const { filters, filterActivations } = getActivationTable(inputImage1,nameL[i]);
