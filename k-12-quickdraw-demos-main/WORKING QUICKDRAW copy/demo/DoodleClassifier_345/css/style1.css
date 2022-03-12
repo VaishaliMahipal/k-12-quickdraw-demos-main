@@ -101,7 +101,24 @@ img{
     flex-direction: column;
     margin: 1rem ;
 }
-
+.images.flex{
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 1rem ;
+}
+.card{
+    text-align: center;
+    
+}
+.card h4{
+    font-size: 10px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    
+}
+img {
+    border-radius: 50%;
+  }
 
 canvas {
     position: relative;
@@ -118,5 +135,30 @@ button {
     border: none;
     border: radius 5px;
     margin: 1rem ;
+  }
+
+  .responsive {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #hidden {
+    visibility: hidden;
+  }
+
+
+  @media(max-width: 768px)
+  {
+
+  }
+
+  @media(max-width: 500px){
+      .navbar{
+          height: 110px;
+      }
+      .navbar ul{
+          padding: 10px;
+          background-color: rgba(0, 0, 0, 0.1);
+      }
   }
  

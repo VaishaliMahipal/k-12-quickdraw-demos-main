@@ -29,10 +29,11 @@ function setup() {
   let clearButton = select('#clear');
   clearButton.mousePressed(() => {
     background(255);
-    select('#outputLayer').html('');
+    
    
   });
 }
+
 
 function guess() {
   // Get input image from the canvas
@@ -43,7 +44,18 @@ function guess() {
 
   // Format res to an array
   const rawProb = Array.from(guess.dataSync());
-
+  console.log("rawProb =")
+  console.log(rawProb)
+  const messageId = ['#cat','#sheep','#apple','#door','#cake','#triangle']
+  for (var i = 0; i < rawProb.length; i++)
+  {
+    const rawP =  (rawProb[i] * 100).toFixed(2);
+    message=CLASSES[i]+" = "+ rawP +"%"
+    select(messageId[i]).html(message);
+    console.log("rawP =")
+    console.log(rawP)
+  }
+  
   // Get top K res with index and probability
   const rawProbWIndex = rawProb.map((probability, index) => {
     return {
@@ -51,15 +63,20 @@ function guess() {
       probability
     }
   });
+ 
 
   const sortProb = rawProbWIndex.sort((a, b) => b.probability - a.probability);
+  
   const topKClassWIndex = sortProb.slice(0, k);
+  
   const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
   
-  select('#outputLayer').html(` ${topKRes.toString()}`);
+ // select('#outputLayer').html(` ${topKRes.toString()}`);
+  document.getElementById("hidden").style.visibility="visible";
+  
   
     
-  }
+  
   
   const layer1 = model.getLayer('conv2d_2');
   console.log("layer1 =")
@@ -121,12 +138,12 @@ function guess() {
   select('#heading3').html("Feature Maps");
   for (let i = 0; i < 8; i++) { 
     
-    renderImage(positionA[i], filters[i], { width: 40, height: 40 },positionT[i])
-    renderImage(positionF[i], filterActivations[0][i], { width: 40, height: 40 },positionTF[i])
+    renderImage(positionA[i], filters[i], { width: 30, height: 30 },positionT[i])
+    renderImage(positionF[i], filterActivations[0][i], { width: 30, height: 30 },positionTF[i])
 
   }
   
-  
+
 }
 
  async function renderImage(container, tensor, imageOpts,textP) {
