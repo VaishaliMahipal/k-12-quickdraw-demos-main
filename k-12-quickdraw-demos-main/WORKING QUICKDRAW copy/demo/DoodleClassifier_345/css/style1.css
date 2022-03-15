@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 :root {
-    --primary-color:#047aed;
+    --primary-color:#333;
 
 }
 
@@ -8,14 +8,17 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    
+
 }
 
 body{
     font-family: 'Lato',sans-serif;
     color: #333;
     line-height: 1.6;
+    font-weight: bold;
+    
 }
-
 ul{
     list-style-type: none;
 }
@@ -26,12 +29,14 @@ a{
 }
 h1,
 h2{
-    font-weight: 300;
+    font-weight: bold;
     line-height: 1.2;
     margin: 10px 0;
 }
 p{
     margin: 10px 0;
+    font-weight: bold;
+    
 }
 img{
     width: 100%;
@@ -61,6 +66,7 @@ img{
 .showcase{
     background-color: var(--primary-color);
     color: #fff;
+    height: 100%;
 }
 .container.flex{
     justify-content: space-between;
@@ -83,38 +89,44 @@ img{
 .flex{
     display:flex;
     height: 100%;
-    margin: 1rem ;
 }
 
 .output.flex{
-    justify-content: space-between;
+    justify-content:space-between;
     flex-direction: column;
-    margin: 1rem ;
+    
+
 }
 .feature.flex{
     justify-content: space-between;
     flex-direction: column;
-    margin: 1rem ;
+   
+    font-size: 12px;
 }
 .filter.flex{
     justify-content: space-between;
     flex-direction: column;
-    margin: 1rem ;
+    font-size: 12px;
 }
 .images.flex{
     justify-content: space-between;
     flex-direction: column;
-    margin: 1rem ;
+    
 }
 .card{
     text-align: center;
     
 }
+.output.card{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    
+}
 .card h4{
     font-size: 10px;
     margin-top: 0px;
-    margin-bottom: 5px;
-    
+    margin-bottom: 3px;
+    font-weight: bold;
 }
 img {
     border-radius: 50%;
@@ -122,8 +134,8 @@ img {
 
 canvas {
     position: relative;
-    border: 1px solid black;
-    margin: 20px 20px 0 0;
+    border: 2px solid black;
+    margin: 10px 25px 0 0;
 }
 
 button {
@@ -134,13 +146,14 @@ button {
     color: #fff;
     border: none;
     border: radius 5px;
-    margin: 1rem ;
+    margin-top: 15px;
+    max-width: 30%;
+    max-height: 30%;
+    font-weight: bold;
+  
   }
 
-  .responsive {
-    max-width: 100%;
-    height: auto;
-  }
+ 
 
   #hidden {
     visibility: hidden;
