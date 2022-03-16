@@ -17,12 +17,14 @@
     <!--Nav Bar-->
     <div class="navbar">
       <div class="container flex">
-        <h1 class="logo">DoodleIt</h1>
+        <h1 class="logo" >
+          <a href="newH.html">DoodleIt </a>
+        </h1>
         <nav>
           <ul>
-            <li><a href="newH.html">Home</a></li>
+           <!-- <li><a href="newH.html">Home</a></li>
             <li><a href="Experiments.html">Experiments</a></li>
-            <li><a href="Tutorial.html">Tutorial</a></li>
+            <li><a href="Tutorial.html">Tutorial</a></li> -->
           </ul>
         </nav>
       </div>
@@ -33,98 +35,137 @@
         <div class="canvas flex">
           <p>
             You can draw images of cat, sheep, apple, door,
-             birthday-cake and triangle
+             cake and triangle
           </p>
           <div id="canvasContainer"></div>
+          <select class="prompts" id="prompts">
+            <option value="prompt 1">Choose a Challenge</option>
+            <option value="prompt 1">1.	Draw a circle and see what object is recognized</option>
+            <option value="prompt 2">2.	Then draw two ears like a cat over it and see how it changes the answer</option>
+            <option value="prompt 3">3.	Draw a vertical line and observe which feature maps get highlighted</option>
+            <option value="prompt 4">4.	Draw a horizontal line and observe which feature maps get highlighted</option>
+            <option value="prompt 5">5.	Draw a diagonal line and observe which feature maps get highlighted</option>
+          </select>
           <button id="clear" onclick="document.location.reload(true)">CLEAR</button>
         </div>
         <div class="filter flex">
-          <div id='heading2'></div>
-          <div id='Filter 1' ></div>
+          <div id='heading2'>Filters</div>
+          <div class="filter card">
+            <div id='Filter 1' ></div>
+          </div>
           <div id='text1' ></div>
-          <div id='Filter 2' ></div>
+          <div class="filter card">
+            <div id='Filter 2' ></div>
+          </div>
           <div id='text2' ></div>
-          <div id='Filter 3' ></div>
+          <div class="filter card">
+            <div id='Filter 3' ></div>
+          </div>
           <div id='text3' ></div>
-          <div id='Filter 4' ></div>
+          <div class="filter card">
+            <div id='Filter 4' ></div>
+          </div>
           <div id='text4' ></div>
-          <div id='Filter 5' ></div>
+          <div class="filter card">
+            <div id='Filter 5' ></div>
+          </div>
           <div id='text5' ></div>
-          <div id='Filter 6' ></div>
+          <div class="filter card">
+            <div id='Filter 6' ></div>
+          </div>
           <div id='text6' ></div>
-          <div id='Filter 7' ></div>
+          <div class="filter card">
+            <div id='Filter 7' ></div>
+          </div>
           <div id='text7' ></div>
-          <div id='Filter 8' ></div>
+          <div class="filter card">
+            <div id='Filter 8' ></div>
+          </div>
           <div id='text8' ></div>
         </div>
         <div class="feature flex">
-          <div id='heading3'></div>
-          <div id='Feature Map 1' ></div>
-          <div id='textF1' ></div>
-          <div id='Feature Map 2' ></div>
-          <div id='textF2' ></div>
-          <div id='Feature Map 3' ></div>
-          <div id='textF3' ></div>
-          <div id='Feature Map 4' ></div>
-          <div id='textF4' ></div>
-          <div id='Feature Map 5' ></div>
-          <div id='textF5' ></div>
-          <div id='Feature Map 6' ></div>
-          <div id='textF6' ></div>
-          <div id='Feature Map 7' ></div>
-          <div id='textF7' ></div>
-          <div id='Feature Map 8' ></div>
-          <div id='textF8' ></div>
+          <div id='heading3'>Feature Maps</div>
+          <div class="feature card">
+            <div id='Feature Map 1' ></div>
+            <div id='textF1' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 2'  ></div>
+            <div id='textF2' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 3' ></div>
+            <div id='textF3' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 4' ></div>
+            <div id='textF4' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 5' ></div>
+            <div id='textF5' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 6' ></div>
+            <div id='textF6' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 7' ></div>
+            <div id='textF7' ></div>
+          </div>
+          <div class="feature card">
+            <div id='Feature Map 8' ></div>
+            <div id='textF8' ></div>
+          </div>
         </div>
         <div class="images flex">
-          <div id="hidden">
-          <div class="card">
-            <h4>OUTPUT LAYER</h4>
-            <img src="images/cat.png" alt="Cat" >
+          <div id='heading4'>Output Neurons</div>
+          <!-- <div id="hidden">
+          <h4>OUTPUT LAYER</h4> -->
+          <div class="neuron card">
+           <!-- <img src="images/cat.png" alt="Cat" > -->
             <h4>CAT</h4>
           </div>
-          <div class="card">
-            <img src="images/sheep.png" alt="Sheep" >
+          <div class="neuron card">
+           <!-- <img src="images/sheep.png" alt="Sheep" > -->
             <h4>SHEEP</h4>
           </div>
-          <div class="card">
-            <img src="images/apple.png" alt="Apple" >
+          <div class="neuron card">
+          <!--  <img src="images/apple.png" alt="Apple" > -->
             <h4>APPLE</h4>
           </div>
-          <div class="card">
-            <img src="images/door.png" alt="Door" >
+          <div class="neuron card">
+          <!--  <img src="images/door.png" alt="Door" > -->
             <h4>DOOR</h4>
           </div>
-          <div class="card">
-            <img src="images/cake.png" alt="Cake" >
+          <div class="neuron card">
+          <!--  <img src="images/cake.png" alt="Cake" > -->
             <h4>CAKE</h4>
           </div>
-          <div class="card">
-            <img src="images/triangle.png" alt="Triangle" >
+          <div class="neuron card">
+          <!--  <img src="images/triangle.png" alt="Triangle" > -->
             <h4>TRIANGLE</h4>
           </div>
         </div>
-        </div>
-        <div class="output flex">
-          
-        <div class="output card">
-          <div id='cat' ></div>
-        </div>
-        <div class="output card">
-          <div id='sheep' ></div>
-        </div>
-        <div class="output card">
-          <div id='apple' ></div>
-        </div>
-        <div class="output card">
-          <div id='door' ></div>
-        </div>
-        <div class="output card">
-          <div id='cake' ></div>
-        </div>
-        <div class="output card">
-          <div id='triangle' ></div>
-        </div>
+        <div class="output flex">  
+          <div class="output card">
+            <div id='cat' ></div>
+          </div>
+          <div class="output card">
+            <div id='sheep' ></div>
+          </div>
+          <div class="output card">
+            <div id='apple' ></div>
+          </div>
+          <div class="output card">
+            <div id='door' ></div>
+          </div>
+          <div class="output card">
+            <div id='cake' ></div>
+          </div>
+          <div class="output card">
+            <div id='triangle' ></div>
+          </div>
         </div>
 
       </div>

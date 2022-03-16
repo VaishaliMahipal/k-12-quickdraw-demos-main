@@ -72,7 +72,7 @@ function guess() {
   const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
   
  // select('#outputLayer').html(` ${topKRes.toString()}`);
-  document.getElementById("hidden").style.visibility="visible";
+ // document.getElementById("hidden").style.visibility="visible";
   
   
     
@@ -134,12 +134,12 @@ function guess() {
   console.log(filters)
   console.log("activations in guess function")
   console.log(filterActivations)
-  select('#heading2').html("Filters");
-  select('#heading3').html("Feature Maps");
+//  select('#heading2').html("Filters");
+ // select('#heading3').html("Feature Maps");
   for (let i = 0; i < 8; i++) { 
     
-    renderImage(positionA[i], filters[i], { width: 30, height: 30 },positionT[i])
-    renderImage(positionF[i], filterActivations[0][i], { width: 30, height: 30 },positionTF[i])
+    renderImage(positionA[i], filters[i], { width: 40, height: 40 },positionT[i])
+    renderImage(positionF[i], filterActivations[0][i], { width: 50, height: 50 },positionTF[i])
 
   }
   
@@ -167,7 +167,7 @@ function guess() {
    
   
     await tf.browser.toPixels(resized, canvas);
-    select(textP).html(container);
+ //   select(textP).html(container);
     resized.dispose();
   }
 
