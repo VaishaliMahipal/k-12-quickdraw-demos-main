@@ -7,6 +7,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style1.css">
   <title>DoodleIt</title>
+  <link rel="stylesheet" href=
+  "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src=
+  "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+    </script>
+    <script src=
+  "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <script src=
+  "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js">
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
@@ -14,6 +25,7 @@
   <script src='vis6.js'></script>
 </head>
 <body>
+  <div id="createImg" style="border:1px solid;">
     <!--Nav Bar-->
     <div class="navbar">
       <div class="container flex">
@@ -47,6 +59,7 @@
             <option value="prompt 5">5.	Draw a diagonal line and observe which feature maps get highlighted</option>
           </select>
           <button id="clear" onclick="document.location.reload(true)">CLEAR</button>
+          <button id="geeks" >Create Image</button>
         </div>
         <div class="filter flex">
           <div id='heading2'>Filters</div>
@@ -167,8 +180,35 @@
             <div id='triangle' ></div>
           </div>
         </div>
-
-      </div>
     </div>
+    <div id='triangle1' style="display:none;" >
+      <img src="" id="newimg" class="top" />
+      </div>
+  </div>
+  </div>
+    <script>
+      $(function() {
+          $("#geeks").click(function() {
+              html2canvas($("#createImg"), {
+                  onrendered: function(canvas) {
+                      var imgsrc = canvas.toDataURL("image/png");
+                      console.log(imgsrc);
+                      $("#newimg").attr('src', imgsrc);
+                      $("#triangle1").show();
+                      var dataURL = canvas.toDataURL();
+                      $.ajax({
+                          type: "POST",
+                          url: "script.php",
+                          data: {
+                              imgBase64: dataURL
+                          }
+                      }).done(function(o) {
+                          console.log('saved');
+                      });
+                  }
+              });
+          });
+      });
+  </script>
 </body>
 </html>

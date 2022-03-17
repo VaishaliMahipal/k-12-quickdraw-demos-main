@@ -28,7 +28,7 @@ function setup() {
   
   let clearButton = select('#clear');
   clearButton.mousePressed(() => {
-    background(255);
+   background(255);
     
    
   });
