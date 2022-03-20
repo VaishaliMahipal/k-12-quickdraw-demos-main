@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style1.css">
   <title>DoodleIt</title>
-  <link rel="stylesheet" href=
+  <!--<link rel="stylesheet" href=
   "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src=
   "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
@@ -17,11 +17,12 @@
     </script>
     <script src=
   "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js">
-    </script>
+    </script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js'></script>
+  <script src='html2canvas.js'></script>
   <script src='vis6.js'></script>
 </head>
 <body>
@@ -49,118 +50,174 @@
             You can draw images of cat, sheep, apple, door,
              cake and triangle
           </p>
+          <div id="form">
+            Code-Name : <input type="text" id="name">
+          </div>
           <div id="canvasContainer"></div>
           <select class="prompts" id="prompts">
             <option value="prompt 1">Choose a Challenge</option>
-            <option value="prompt 1">1.	Draw a circle and see what object is recognized</option>
-            <option value="prompt 2">2.	Then draw two ears like a cat over it and see how it changes the answer</option>
-            <option value="prompt 3">3.	Draw a vertical line and observe which feature maps get highlighted</option>
-            <option value="prompt 4">4.	Draw a horizontal line and observe which feature maps get highlighted</option>
-            <option value="prompt 5">5.	Draw a diagonal line and observe which feature maps get highlighted</option>
+            <option value="prompt 2">1.	Draw a circle and see what object is recognized</option>
+            <option value="prompt 3">2.	Draw circle and then two ears like a cat over it and see how it changes the answer</option>
+            <option value="prompt 4">3. Draw circle and then a stem over it and see how it changes the answer</option>
+            <option value="prompt 5">4.	Draw an oval and see what object is recognized</option>
+            <option value="prompt 6">5.	Draw an oval and then draw a four lines like leg under it</option>
+            <option value="prompt 7">6.	Draw an oval and then draw a four lines like candle over it</option>
+            <option value="prompt 8">7.	Draw a vertical line and observe which feature maps get highlighted</option>
+            <option value="prompt 9">8.	Draw a horizontal line and observe which feature maps get highlighted</option>
+            <option value="prompt 10">9.	Draw a diagonal line and observe which feature maps get highlighted</option>
           </select>
-          <button id="clear" onclick="document.location.reload(true)">CLEAR</button>
-          <button id="geeks" >Create Image</button>
+          <button id="clear" onclick="doCapture();">CLEAR</button>
         </div>
         <div class="filter flex">
           <div id='heading2'>Filters</div>
-          <div class="filter card">
-            <div id='Filter 1' ></div>
+          <div class ="row flex">
+            <div id='text1' >1</div>
+            <div class="filter card">
+              <div id='Filter 1' ></div>
+            </div>
           </div>
-          <div id='text1' ></div>
-          <div class="filter card">
-            <div id='Filter 2' ></div>
+          <div class ="row flex">
+            <div id='text2' >2</div>
+            <div class="filter card">
+              <div id='Filter 2' ></div>
+            </div>
           </div>
-          <div id='text2' ></div>
-          <div class="filter card">
-            <div id='Filter 3' ></div>
+          <div class ="row flex"> 
+            <div id='text3' >3</div>
+            <div class="filter card">
+              <div id='Filter 3' ></div>
+            </div>
           </div>
-          <div id='text3' ></div>
-          <div class="filter card">
-            <div id='Filter 4' ></div>
+          <div class ="row flex">
+            <div id='text4' >4</div>
+            <div class="filter card">
+              <div id='Filter 4' ></div>
+            </div>
           </div>
-          <div id='text4' ></div>
-          <div class="filter card">
-            <div id='Filter 5' ></div>
+          <div class ="row flex">
+            <div id='text5' >5</div>
+            <div class="filter card">
+              <div id='Filter 5' ></div>
+            </div>
           </div>
-          <div id='text5' ></div>
-          <div class="filter card">
-            <div id='Filter 6' ></div>
+          <div class ="row flex">
+            <div id='text6' >6</div>
+            <div class="filter card">
+              <div id='Filter 6' ></div>
+            </div>
           </div>
-          <div id='text6' ></div>
-          <div class="filter card">
-            <div id='Filter 7' ></div>
+          <div class ="row flex">
+            <div id='text7' >7</div>
+            <div class="filter card">
+              <div id='Filter 7' ></div>
+            </div>
           </div>
-          <div id='text7' ></div>
-          <div class="filter card">
-            <div id='Filter 8' ></div>
+          <div class ="row flex">
+            <div id='text8' >8</div>
+            <div class="filter card">
+              <div id='Filter 8' ></div>
+            </div>
           </div>
-          <div id='text8' ></div>
         </div>
         <div class="feature flex">
           <div id='heading3'>Feature Maps</div>
-          <div class="feature card">
-            <div id='Feature Map 1' ></div>
-            <div id='textF1' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 1' ></div>
+            </div>
+            <div id='textF1' >1</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 2'  ></div>
-            <div id='textF2' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 2'  ></div>
+            </div>
+            <div id='textF2' >2</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 3' ></div>
-            <div id='textF3' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 3' ></div>
+            </div>
+            <div id='textF3' >3</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 4' ></div>
-            <div id='textF4' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 4' ></div>
+            </div>
+            <div id='textF4' >4</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 5' ></div>
-            <div id='textF5' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 5' ></div>
+            </div>
+            <div id='textF5' >5</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 6' ></div>
-            <div id='textF6' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 6' ></div>
+            </div>
+            <div id='textF6' >6</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 7' ></div>
-            <div id='textF7' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 7' ></div>
+            </div>
+            <div id='textF7' >7</div>
           </div>
-          <div class="feature card">
-            <div id='Feature Map 8' ></div>
-            <div id='textF8' ></div>
+          <div class ="row flex">
+            <div class="feature card">
+              <div id='Feature Map 8' ></div>
+            </div>
+            <div id='textF8' >8</div>
           </div>
         </div>
         <div class="images flex">
           <div id='heading4'>Output Neurons</div>
           <!-- <div id="hidden">
           <h4>OUTPUT LAYER</h4> -->
-          <div class="neuron card">
-           <!-- <img src="images/cat.png" alt="Cat" > -->
-            <h4>CAT</h4>
+          <div class ="row flex">
+            <div class="neuron card">
+              <!-- <img src="images/cat.png" alt="Cat" > -->
+              <h4>CAT</h4>
+            </div>
+            <div id='cat' ></div>
           </div>
-          <div class="neuron card">
-           <!-- <img src="images/sheep.png" alt="Sheep" > -->
-            <h4>SHEEP</h4>
+          <div class ="row flex">
+            <div class="neuron card">
+              <!-- <img src="images/sheep.png" alt="Sheep" > -->
+              <h4>SHEEP</h4>
+            </div>
+            <div id='sheep' ></div>
           </div>
-          <div class="neuron card">
-          <!--  <img src="images/apple.png" alt="Apple" > -->
-            <h4>APPLE</h4>
+          <div class ="row flex">
+            <div class="neuron card">
+              <!--  <img src="images/apple.png" alt="Apple" > -->
+              <h4>APPLE</h4>
+            </div>
+            <div id='apple' ></div>
           </div>
-          <div class="neuron card">
-          <!--  <img src="images/door.png" alt="Door" > -->
-            <h4>DOOR</h4>
+          <div class ="row flex">
+            <div class="neuron card">
+              <!--  <img src="images/door.png" alt="Door" > -->
+              <h4>DOOR</h4>
+            </div>
+            <div id='door' ></div>
           </div>
-          <div class="neuron card">
-          <!--  <img src="images/cake.png" alt="Cake" > -->
-            <h4>CAKE</h4>
+          <div class ="row flex">
+            <div class="neuron card">
+              <!--  <img src="images/cake.png" alt="Cake" > -->
+              <h4>CAKE</h4>
+            </div>
+            <div id='cake' ></div>
           </div>
-          <div class="neuron card">
-          <!--  <img src="images/triangle.png" alt="Triangle" > -->
-            <h4>TRIANGLE</h4>
+          <div class ="row flex">
+            <div class="neuron card">
+              <!--  <img src="images/triangle.png" alt="Triangle" > -->
+              <h4>TRIANGLE</h4>
+            </div>
+            <div id='triangle' ></div>
           </div>
         </div>
-        <div class="output flex">  
+        <!--<div class="output flex">  
           <div class="output card">
             <div id='cat' ></div>
           </div>
@@ -179,36 +236,33 @@
           <div class="output card">
             <div id='triangle' ></div>
           </div>
-        </div>
+        </div> -->
     </div>
-    <div id='triangle1' style="display:none;" >
-      <img src="" id="newimg" class="top" />
-      </div>
   </div>
   </div>
+
     <script>
-      $(function() {
-          $("#geeks").click(function() {
-              html2canvas($("#createImg"), {
-                  onrendered: function(canvas) {
-                      var imgsrc = canvas.toDataURL("image/png");
-                      console.log(imgsrc);
-                      $("#newimg").attr('src', imgsrc);
-                      $("#triangle1").show();
-                      var dataURL = canvas.toDataURL();
-                      $.ajax({
-                          type: "POST",
-                          url: "script.php",
-                          data: {
-                              imgBase64: dataURL
-                          }
-                      }).done(function(o) {
-                          console.log('saved');
-                      });
-                  }
-              });
-          });
+    function doCapture() {
+      window.scrollTo(0, 0);
+ 
+      html2canvas(document.getElementById("createImg")).then(function (canvas) {
+        var name=document.getElementById("name").value;
+        
+        var ajax = new XMLHttpRequest();
+        ajax.open("POST", "save-capture.php", true);
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+        };
       });
+      var dropDown = document.getElementById("prompts");
+      dropDown.selectedIndex = 0;
+      background(255);
+    }
+     
   </script>
 </body>
 </html>

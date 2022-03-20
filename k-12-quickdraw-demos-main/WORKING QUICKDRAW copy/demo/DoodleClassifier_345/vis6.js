@@ -26,12 +26,12 @@ function setup() {
   cnv.parent('canvasContainer');
 
   
-  let clearButton = select('#clear');
+ /* let clearButton = select('#clear');
   clearButton.mousePressed(() => {
    background(255);
     
    
-  });
+  });*/
 }
 
 
@@ -46,12 +46,29 @@ function guess() {
   const rawProb = Array.from(guess.dataSync());
   console.log("rawProb =")
   console.log(rawProb)
+  //var maximums= Math.max(rawProb);
   const messageId = ['#cat','#sheep','#apple','#door','#cake','#triangle']
+  const CLASSES2 = ['Cat','Sheep','Apple','Door','Cake','Triangle']
   for (var i = 0; i < rawProb.length; i++)
   {
     const rawP =  (rawProb[i] * 100).toFixed(2);
-    message=CLASSES[i]+" = "+ rawP +"%"
+    message=CLASSES2[i]+" = "+ rawP +"%"
     select(messageId[i]).html(message);
+    if (rawP >= 80){
+      select(messageId[i]).html("<span style='background-color: #008000'>"+message+"</span>");
+    }
+    else if(rawP >= 50 && rawP<80)
+    {
+      select(messageId[i]).html("<span style='background-color: 	#FFA500'>"+message+"</span>");
+    }
+    else if(rawP >= 15 && rawP<50)
+    {
+      select(messageId[i]).html("<span style='background-color: 	#FFFACD'>"+message+"</span>");
+    }
+    else if(rawP<=15)
+    {
+      select(messageId[i]).html("<span style='background-color: 	#FF0000'>"+message+"</span>");
+    }
     console.log("rawP =")
     console.log(rawP)
   }
